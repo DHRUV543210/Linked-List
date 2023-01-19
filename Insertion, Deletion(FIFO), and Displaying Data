@@ -1,0 +1,79 @@
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+
+typedef struct node{
+    int data;
+    struct node *next;
+}node;
+
+node*insertion(int data, node*head)
+{
+    node* ptr=(node*)malloc(sizeof(node));
+    ptr->data=data;
+    ptr->next=NULL;
+    if(head==NULL)
+    {
+        head=ptr;
+        return head;
+    }
+    node*temp=head;
+    while(temp->next!=NULL)
+    {
+        temp=temp->next;
+    }
+    temp->next=ptr;
+    return head;
+}
+
+void deletion(node*head)
+{
+    node*temp=head;
+    head=head->next;
+    free(temp);
+    cout<<head->data<<" is now head"<<endl;
+}
+
+void display(node*temp)
+{
+    cout<<"Data in Linked List are: "<<endl;
+    while(temp!=NULL)
+    {
+        cout<<temp->data<<endl;
+        temp=temp->next;
+    }
+}
+
+int main()
+{
+    int data,a;
+    
+    node *head=NULL;
+    
+    while(1)
+    {
+        cout<<"What would you like to do: "<<endl;
+        cout<<"1 for insertion\n2 for viewing\n3 for Deletion\n4 to EXIT"<<endl;
+        cin>>a;
+        if(a==1)
+        {
+            cout<<"What data would you simply like to store: "<<endl;
+            cin>>data;
+            head=insertion(data,head);
+        }
+        if(a==2)
+        {
+            display(head);
+        }
+        if(a==3)
+        {
+            deletion(head);
+        }
+        if(a==4)
+        {
+            break;
+        }
+        
+    }
+    return 0;
+}
